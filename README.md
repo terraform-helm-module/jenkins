@@ -1,5 +1,46 @@
 # Jenkins Helm Module
 
+## Usage example
+
+Here's the gist of using it via github.
+
+```terraform
+data helm_repository stable {
+  name = "stable"
+  url  = "https://kubernetes-charts.storage.googleapis.com"
+}
+
+module jenkins {
+  source     = "git@github.com:terraform-helm-module/jenkins?ref=v0.2.0"
+  namespace  = "jenkins"
+  apps       = var.apps
+  repository = local.repository["stable"]
+}
+```
+
+```terraform
+apps = {
+  jenkins = {
+    name          = "jenkins"
+    version       = "1.5.0"
+    chart         = "stable/jenkins"
+    force_update  = "true"
+    wait          = "false"
+    recreate_pods = "true"
+    deploy        = 1
+
+    values = [<<EOF
+persistence:
+  enabled: true
+  size: "4Gi"
+EOF
+    ]
+  }
+}
+```
+
+
+
 ## Module Variables
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
