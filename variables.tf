@@ -1,13 +1,13 @@
-variable namespace {
+variable "namespace" {
   description = "Namespace to where deploy CI/CD"
 }
 
-variable apps {
+variable "apps" {
   type        = map
   description = "Multiple applications to deploy"
 }
 
-variable repository {
+variable "repository" {
   type        = string
   description = "Collection of Helm repositories"
 }
