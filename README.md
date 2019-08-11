@@ -14,10 +14,11 @@ module jenkins {
   source     = "git@github.com:terraform-helm-module/jenkins?ref=v0.2.0"
   namespace  = "jenkins"
   apps       = var.apps
-  repository = local.repository["stable"]
+  repository = data.helm_repository.stable.metadata.0.name
 }
 ```
 
+`varialbes.tfvars`
 ```terraform
 apps = {
   jenkins = {
@@ -58,9 +59,9 @@ EOF
 
 <!-- START makefile-doc -->
 ```
-$ make help 
+$ make help
 hooks                          Commit hooks setup
 validate                       Validate with pre-commit hooks
-release                        Create release version 
+release                        Create release version
 ```
 <!-- END makefile-doc -->
